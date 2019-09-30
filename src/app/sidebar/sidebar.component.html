@@ -5,19 +5,10 @@
         <ul>
           <li *ngFor="let menu of menus" [ngClass]="{'active': menu.active , 'sidebar-dropdown':menu.type === 'dropdown' , 'header-menu':menu.type === 'header'}">
             <span *ngIf="menu.type === 'header'">{{menu.title}} </span> <br>
-            <a *ngIf="menu.type !== 'header'" href="#" (click)='toggle(menu)'>
+            <a *ngIf="menu.type !== 'header'" style="cursor: pointer;" (click)='onPropagar(menu.value)'>
               <i class="{{menu.icon}}"></i>
               <span>{{menu.title}}</span>
             </a>
-            <div *ngIf="menu.type === 'dropdown'" class="sidebar-submenu" [@slide]="getState(menu)">
-              <ul>
-                <li *ngFor="let submenu of menu.submenus">
-                  <a href="#"> {{submenu.title}}
-                    <span *ngIf="submenu.badge" class="badge badge-pill" [ngClass]="submenu.badge.class">{{submenu.badge.text}}</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
           </li>
         </ul>
       </div>

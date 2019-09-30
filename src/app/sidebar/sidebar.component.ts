@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SidebarService } from './sidebar.service';
 // import { MenusService } from './menus.service';
@@ -16,6 +16,8 @@ import { SidebarService } from './sidebar.service';
   ]
 })
 export class SidebarComponent implements OnInit {
+
+  @Output() propagar = new EventEmitter<string>();
   menus = [];
   constructor(public sidebarservice: SidebarService) {
     this.menus = sidebarservice.getMenuList();
@@ -51,6 +53,10 @@ export class SidebarComponent implements OnInit {
 
   hasBackgroundImage() {
     return this.sidebarservice.hasBackgroundImage;
+  }
+
+  onPropagar(channel: number) {
+    this.propagar.emit(channel.toString());
   }
 
 }

@@ -1,63 +1,148 @@
 <div class="page-wrapper" [ngClass]="{'toggled' : getSideBarState()}">
-  <app-sidebar></app-sidebar>
-  <main class="page-content">
+  <app-sidebar (propagar)="changeChannel($event)"></app-sidebar>
+  <main class="page-content" style="overflow-x: hidden;">
     <div class="container-fluid">
       <div class="row">
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-3">
           <a class="btn btn-outline-secondary mr-1 mb-1" (click)="toggleSidebar()">Menu</a>
         </div>
+        <div class="col-md-6" style="text-align: center">
+          <h3 *ngIf="channel == 1">Voltaje</h3>
+          <h3 *ngIf="channel == 2">Corriente</h3>
+          <h3 *ngIf="channel == 3">Potencias</h3>
+        </div>
       </div>
-      <div class="row">
-        <div class="col">
-          <div style="display: block;">
-            <h3 style="text-align: center">{{name}}</h3>
-            <canvas baseChart width="300" height="70" [datasets]="lineChartData" [labels]="lineChartLabels"
+      <div *ngIf="channel !== 3" class="row">
+          <div *ngIf="channel==1" style="display: block;">
+            <canvas baseChart width="1100" height="350" [datasets]="lineChartData" [labels]="lineChartLabels"
+              [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+              [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+          </div>
+          <div *ngIf="channel==2" style="display: block;">
+            <canvas baseChart width="1100" height="350" [datasets]="lineChartCurrentData" [labels]="lineChartLabels"
               [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
               [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
               (chartClick)="chartClicked($event)"></canvas>
           </div>
           <!-- <app-graphic [lineChartData]="lineChartData" name="Gráfica de voltaje (V)"></app-graphic> -->
-        </div>
       </div>
-      <div class="row">
+      <div *ngIf="channel == 1" class="row">
         <div class="col-md-3 col-sm-3 col-lg-3">
           <h5>Thdv de la fase A = 100%</h5>
-          <!-- <h3>Thdv de la fase A = 100%</h3> -->
-            <div style="display: block">
-                <canvas baseChart 
-                  
-                  [data]="doughnutChartData"
-                  [labels]="doughnutChartLabels"
-                  [chartType]="doughnutChartType">
-                </canvas>
-              </div>
-          <!-- <app-graphic [lineChartData]="lineChartData" name="Gráfica de voltaje (V)"></app-graphic> -->
+          <div style="display: block">
+            <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType">
+            </canvas>
+          </div>
         </div>
         <div class="col-md-3 col-sm-3 col-lg-3">
           <h5>Thdv de la fase B = 100%</h5>
           <!-- <h3>Thdv de la fase A = 100%</h3> -->
-            <div style="display: block">
-                <canvas baseChart 
-                [colors]="donutColorsB"
-                  [data]="doughnutChartData"
-                  [labels]="doughnutChartLabels"
-                  [chartType]="doughnutChartType">
-                </canvas>
-              </div>
+          <div style="display: block">
+            <canvas baseChart [colors]="donutColorsB" [data]="doughnutChartData" [labels]="doughnutChartLabels"
+              [chartType]="doughnutChartType">
+            </canvas>
+          </div>
           <!-- <app-graphic [lineChartData]="lineChartData" name="Gráfica de voltaje (V)"></app-graphic> -->
         </div>
         <div class="col-md-3 col-sm-3 col-lg-3">
           <h5>Thdv de la fase C = 100%</h5>
           <!-- <h3>Thdv de la fase A = 100%</h3> -->
-            <div style="display: block">
-                <canvas baseChart 
-                  [colors]="donutColorsC"
-                  [data]="doughnutChartData"
-                  [labels]="doughnutChartLabels"
-                  [chartType]="doughnutChartType">
-                </canvas>
-              </div>
+          <div style="display: block">
+            <canvas baseChart [colors]="donutColorsC" [data]="doughnutChartData" [labels]="doughnutChartLabels"
+              [chartType]="doughnutChartType">
+            </canvas>
+          </div>
           <!-- <app-graphic [lineChartData]="lineChartData" name="Gráfica de voltaje (V)"></app-graphic> -->
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th scope="col">Fase</th>
+                    <th scope="col">Valor RMS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">A</th>
+                    <td>180</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">B</th>
+                    <td>180</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">C</th>
+                    <td>180</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+      </div>
+      <div *ngIf="channel == 2" class="row">
+        <div class="col-md-3 col-sm-3 col-lg-3">
+          <h5>Thdi de la fase A = 100%</h5>
+          <!-- <h3>Thdv de la fase A = 100%</h3> -->
+          <div style="display: block">
+            <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType">
+            </canvas>
+          </div>
+          <!-- <app-graphic [lineChartData]="lineChartData" name="Gráfica de voltaje (V)"></app-graphic> -->
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+          <h5>Thdi de la fase B = 100%</h5>
+          <!-- <h3>Thdv de la fase A = 100%</h3> -->
+          <div style="display: block">
+            <canvas baseChart [colors]="donutColorsB" [data]="doughnutChartData" [labels]="doughnutChartLabels"
+              [chartType]="doughnutChartType">
+            </canvas>
+          </div>
+          <!-- <app-graphic [lineChartData]="lineChartData" name="Gráfica de voltaje (V)"></app-graphic> -->
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+          <h5>Thdi de la fase C = 100%</h5>
+          <!-- <h3>Thdv de la fase A = 100%</h3> -->
+          <div style="display: block">
+            <canvas baseChart [colors]="donutColorsC" [data]="doughnutChartData" [labels]="doughnutChartLabels"
+              [chartType]="doughnutChartType">
+            </canvas>
+          </div>
+          <!-- <app-graphic [lineChartData]="lineChartData" name="Gráfica de voltaje (V)"></app-graphic> -->
+        </div>
+      </div>
+      <div *ngIf="channel == 3" class="row">
+        <div class="row">
+          <div class="col-md-4 col-lg-4 col-sm-4" style="display: block;">
+            <h3 style="text-align: center">Potencia Activa</h3>
+            <canvas baseChart width="550" height="400" [datasets]="lineChartWattData" [labels]="lineChartLabels"
+              [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+              [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+              <h5>Factor de potencia en fase A = 100%</h5>
+              <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType">
+                </canvas>              
+          </div>
+          <div class="col-md-4 col-lg-4 col-sm-4" style="display: block;">
+              <h3 style="text-align: center">Potencia Reactiva</h3>
+            <canvas baseChart width="550" height="400" [datasets]="lineChartVarData" [labels]="lineChartLabels"
+              [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+              [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+              <h5>Factor de potencia en fase B = 100%</h5>
+              <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType">
+                </canvas>
+          </div>
+          <div class="col-md-4 col-lg-4 col-sm-4" style="display: block;">
+              <h3 style="text-align: center">Potencia Aparente</h3>
+            <canvas baseChart width="550" height="400" [datasets]="lineChartVaData" [labels]="lineChartLabels"
+              [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+              [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+              <h5>Factor de potencia en fase C = 100%</h5>
+              <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType">
+                </canvas>
+          </div>
         </div>
       </div>
     </div>

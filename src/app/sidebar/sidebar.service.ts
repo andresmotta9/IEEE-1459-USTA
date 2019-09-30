@@ -16,6 +16,7 @@ export class SidebarService {
       icon: 'fa fa-tachometer-alt',
       active: false,
       type: 'simple',
+      value: 1,
       badge: {
         text: 'New ',
         class: 'badge-warning'
@@ -26,6 +27,7 @@ export class SidebarService {
       icon: 'fa fa-tachometer-alt',
       active: false,
       type: 'simple',
+      value: 2,
       badge: {
         text: '3',
         class: 'badge-danger'
@@ -35,7 +37,8 @@ export class SidebarService {
       title: 'Potencias',
       icon: 'fa fa-tachometer-alt',
       active: false,
-      type: 'simple'
+      type: 'simple',
+      value: 3
     }
     // {
     //   title: 'Charts',
