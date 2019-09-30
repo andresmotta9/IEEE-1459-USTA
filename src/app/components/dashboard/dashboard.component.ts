@@ -208,6 +208,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.lineChartData[position].data = dataArray;
       // console.log('NEW data ', this.lineChartData[position].data);
     } else {
+      // @ts-ignore
       this.lineChartData[position].data.push(value)
     }
   }
@@ -222,6 +223,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.lineChartCurrentData[position].data = dataArray;
       this.lineChartCurrentData[position].data[this.lineChartLabels.length - 2] = value
     } else {
+      // @ts-ignore
       this.lineChartCurrentData[position].data.push(value)
     }
   }  
@@ -236,6 +238,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.lineChartWattData[position].data = dataArray;
       this.lineChartWattData[position].data[this.lineChartLabels.length - 2] = value
     } else {
+      // @ts-ignore
       this.lineChartWattData[position].data.push(value)
     }
   }
@@ -250,6 +253,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.lineChartVarData[position].data = dataArray;
       this.lineChartVarData[position].data[this.lineChartLabels.length - 2] = value
     } else {
+      // @ts-ignore
       this.lineChartVarData[position].data.push(value)
     }
   }
@@ -264,6 +268,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.lineChartVaData[position].data = dataArray;
       this.lineChartVaData[position].data[this.lineChartLabels.length - 2] = value
     } else {
+      // @ts-ignore
       this.lineChartVaData[position].data.push(value)
     }
   }
@@ -278,6 +283,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.lineChartThdiData[position].data = dataArray;
       this.lineChartThdiData[position].data[this.lineChartLabels.length - 2] = value
     } else {
+      // @ts-ignore
       this.lineChartThdiData[position].data.push(value)
     }
   }
@@ -292,6 +298,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.lineChartThdvData[position].data = dataArray;
       this.lineChartThdvData[position].data[this.lineChartLabels.length - 2] = value
     } else {
+      // @ts-ignore
       this.lineChartThdvData[position].data.push(value)
     }
   }
