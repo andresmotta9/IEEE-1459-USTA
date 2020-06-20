@@ -144,48 +144,49 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   getData() {
-    this.http.get('https://json-ade-metering.herokuapp.com/registers/1')
+    this.http.get('https://tesis-node-mysql.herokuapp.com/registers')
     .subscribe((data: any) => {
-      for (const item in data) {
-        if(item !== "id"){
-          this.setChartData(0, parseInt(data[item].VAWV));
-          this.setChartData(1, parseInt(data[item].VBWV));
-          this.setChartData(2, parseInt(data[item].VCWV));
-          this.setChartData(3, parseInt(data[item].VNWV));
-          this.setChartCurrentData(0, parseInt(data[item].IAWV));
-          this.setChartCurrentData(1, parseInt(data[item].IBWV));
-          this.setChartCurrentData(2, parseInt(data[item].ICWV));
-          this.setChartCurrentData(3, parseInt(data[item].INWV));
-          this.setLineChartWattData(0, parseInt(data[item].AWATT));
-          this.setLineChartWattData(1, parseInt(data[item].BWATT));
-          this.setLineChartWattData(2, parseInt(data[item].CWATT));
-          this.setLineChartWattData(3, parseInt(data[item].NWATT));
-          this.setLineChartVarData(0, parseInt(data[item].AVAR));
-          this.setLineChartVarData(1, parseInt(data[item].BVAR));
-          this.setLineChartVarData(2, parseInt(data[item].CVAR));
-          this.setLineChartVarData(3, parseInt(data[item].NVAR));
-          this.setLineChartVaData(0, parseInt(data[item].AVA));
-          this.setLineChartVaData(1, parseInt(data[item].BVA));
-          this.setLineChartVaData(2, parseInt(data[item].CVA));
-          this.setLineChartVaData(3, parseInt(data[item].NVA));
-          this.setLineChartThdiData(0, parseInt(data[item].AVTHD));
-          this.setLineChartThdiData(1, parseInt(data[item].BVTHD));
-          this.setLineChartThdiData(2, parseInt(data[item].CVTHD));
-          this.setLineChartThdiData(3, parseInt(data[item].NVTHD));
-          this.setLineChartThdiData(0, parseInt(data[item].AITHD));
-          this.setLineChartThdiData(1, parseInt(data[item].BITHD));
-          this.setLineChartThdiData(2, parseInt(data[item].CITHD));
-          this.setLineChartThdiData(3, parseInt(data[item].NITHD));
-          this.setLineChartThdvData(0, parseInt(data[item].AITHD));
-          this.setLineChartThdvData(1, parseInt(data[item].BITHD));
-          this.setLineChartThdvData(2, parseInt(data[item].CITHD));
-          this.setLineChartThdvData(3, parseInt(data[item].NITHD));
-          this.setLineChartThdvData(0, parseInt(data[item].AVTHD));
-          this.setLineChartThdvData(1, parseInt(data[item].BVTHD));
-          this.setLineChartThdvData(2, parseInt(data[item].CVTHD));
-          this.setLineChartThdvData(3, parseInt(data[item].NVTHD));
-        }
-      }
+      console.log(data)
+      // for (const item in data) {
+      //   if(item !== "id"){
+      //     this.setChartData(0, parseInt(data[item].VAWV));
+      //     this.setChartData(1, parseInt(data[item].VBWV));
+      //     this.setChartData(2, parseInt(data[item].VCWV));
+      //     this.setChartData(3, parseInt(data[item].VNWV));
+      //     this.setChartCurrentData(0, parseInt(data[item].IAWV));
+      //     this.setChartCurrentData(1, parseInt(data[item].IBWV));
+      //     this.setChartCurrentData(2, parseInt(data[item].ICWV));
+      //     this.setChartCurrentData(3, parseInt(data[item].INWV));
+      //     this.setLineChartWattData(0, parseInt(data[item].AWATT));
+      //     this.setLineChartWattData(1, parseInt(data[item].BWATT));
+      //     this.setLineChartWattData(2, parseInt(data[item].CWATT));
+      //     this.setLineChartWattData(3, parseInt(data[item].NWATT));
+      //     this.setLineChartVarData(0, parseInt(data[item].AVAR));
+      //     this.setLineChartVarData(1, parseInt(data[item].BVAR));
+      //     this.setLineChartVarData(2, parseInt(data[item].CVAR));
+      //     this.setLineChartVarData(3, parseInt(data[item].NVAR));
+      //     this.setLineChartVaData(0, parseInt(data[item].AVA));
+      //     this.setLineChartVaData(1, parseInt(data[item].BVA));
+      //     this.setLineChartVaData(2, parseInt(data[item].CVA));
+      //     this.setLineChartVaData(3, parseInt(data[item].NVA));
+      //     this.setLineChartThdiData(0, parseInt(data[item].AVTHD));
+      //     this.setLineChartThdiData(1, parseInt(data[item].BVTHD));
+      //     this.setLineChartThdiData(2, parseInt(data[item].CVTHD));
+      //     this.setLineChartThdiData(3, parseInt(data[item].NVTHD));
+      //     this.setLineChartThdiData(0, parseInt(data[item].AITHD));
+      //     this.setLineChartThdiData(1, parseInt(data[item].BITHD));
+      //     this.setLineChartThdiData(2, parseInt(data[item].CITHD));
+      //     this.setLineChartThdiData(3, parseInt(data[item].NITHD));
+      //     this.setLineChartThdvData(0, parseInt(data[item].AITHD));
+      //     this.setLineChartThdvData(1, parseInt(data[item].BITHD));
+      //     this.setLineChartThdvData(2, parseInt(data[item].CITHD));
+      //     this.setLineChartThdvData(3, parseInt(data[item].NITHD));
+      //     this.setLineChartThdvData(0, parseInt(data[item].AVTHD));
+      //     this.setLineChartThdvData(1, parseInt(data[item].BVTHD));
+      //     this.setLineChartThdvData(2, parseInt(data[item].CVTHD));
+      //     this.setLineChartThdvData(3, parseInt(data[item].NVTHD));
+      //   }
+      // }
     })
   }
 
