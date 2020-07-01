@@ -1,3 +1,9 @@
 .bg-dark {
     background-color: #1d1d1d !important;
 }
+
+.navbar-custom {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}

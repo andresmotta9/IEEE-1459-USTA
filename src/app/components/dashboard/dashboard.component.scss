@@ -56,5 +56,19 @@
   width: 300px !important;
   height: 180px !important;
 }
+
+.graphs {
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  @media only screen and (max-width: 900px) {
+    flex-direction: column; 
+    }
+}
+
+.container-fluid {
+  margin-top: 7rem;
+}
   
   

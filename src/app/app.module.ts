@@ -17,7 +17,6 @@ import { HomeComponent } from './components/home/home.component';
 import { GraphicComponent } from './components/graphic/graphic.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ChartsModule } from 'ng2-charts';
-import { ExcelComponent } from './components/excel/excel.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -30,8 +29,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DashboardComponent,
     NavbarComponent,
     HomeComponent,
-    GraphicComponent,
-    ExcelComponent
+    GraphicComponent
   ],
   imports: [
     BrowserModule,
