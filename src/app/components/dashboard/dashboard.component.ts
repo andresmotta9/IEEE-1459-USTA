@@ -218,7 +218,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             this.setChartCurrentCData(0, parseInt(data[item].CIRMS));
             this.setChartCurrentCData(1, parseInt(data[item].CFIRMS));
             this.setChartCurrentCData(2, parseInt(data[item].CIHRMS_CAL));
-          }, 500);
+          }, 50);
           // this.setChartData(3, parseInt(data[item].NVRMS));
 
         }
