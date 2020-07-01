@@ -47,33 +47,33 @@ export class DashboardComponent implements OnInit, OnDestroy {
     [10, 20]
   ];
   public doughnutChartType: ChartType = 'doughnut';
-  private donutColorsA=[
+  private donutColorsA = [
     {
       backgroundColor: [
         'rgba(24, 93, 220, 1)'
-    ]
+      ]
     }
   ];
-  private donutColorsB=[
+  private donutColorsB = [
     {
       backgroundColor: [
         'rgba(118, 183, 172, 1)'
-    ]
+      ]
     }
   ];
-  private donutColorsC=[
+  private donutColorsC = [
     {
       backgroundColor: [
         'rgba(226, 189, 111, 54)'
-    ]
+      ]
     }
   ];
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
+    // console.log(event, active);
   }
 
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
+    // console.log(event, active);
   }
 
   public lineChartData: ChartDataSets[] = [
@@ -143,7 +143,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     { data: [0], label: 'Línea N' }
   ];
 
-  public lineChartLabels: Label[] = ['','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''];
+  public lineChartLabels: Label[] = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''];
 
   public lineChartOptions: any = {
     responsive: true,
@@ -165,8 +165,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   hideSidebar() {
     this.sidebarservice.setSidebarState(true);
   }
-  changeChannel(message)
-  {
+  changeChannel(message) {
     this.channel = parseInt(message)
   }
 
@@ -177,7 +176,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if(this.interval) {
+    if (this.interval) {
       clearInterval(this.interval)
     }
     // if(this.interval2) {
@@ -190,76 +189,75 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getData() {
     this.http.get('https://tesis-node-mysql.herokuapp.com/registers')
-    .subscribe((data: any) => {
+      .subscribe((data: any) => {
 
-      for (let item in data) {
-        setTimeout(() => {
-          console.log(data[item])
-          this.setChartData(0, parseInt(data[item].AVRMS));
-          this.setChartData(1, parseInt(data[item].AFVRMS));
-          this.setChartData(2, parseInt(data[item].AVHRMS_CAL));
-          this.setChartBData(0, parseInt(data[item].BVRMS));
-          this.setChartBData(1, parseInt(data[item].BFVRMS));
-          this.setChartBData(2, parseInt(data[item].BVHRMS_CAL));
-          this.setChartCData(0, parseInt(data[item].CVRMS));
-          this.setChartCData(1, parseInt(data[item].CFVRMS));
-          this.setChartCData(2, parseInt(data[item].CVHRMS_CAL));
-          this.setAthdv(data[item].AVTHD*100);
-          this.setBthdv(data[item].BVTHD*100);
-          this.setCthdv(data[item].CVTHD*100);
-          this.setAthdi(data[item].AITHD*100);
-          this.setBthdi(data[item].BITHD*100);
-          this.setCthdi(data[item].CITHD*100);
-          this.setChartCurrentData(0, parseInt(data[item].AIRMS));
-          this.setChartCurrentData(1, parseInt(data[item].AFIRMS));
-          this.setChartCurrentData(2, parseInt(data[item].AIHRMS_CAL));
-          this.setChartCurrentBData(0, parseInt(data[item].BIRMS));
-          this.setChartCurrentBData(1, parseInt(data[item].BFIRMS));
-          this.setChartCurrentBData(2, parseInt(data[item].BIHRMS_CAL));
-          this.setChartCurrentCData(0, parseInt(data[item].CIRMS));
-          this.setChartCurrentCData(1, parseInt(data[item].CFIRMS));
-          this.setChartCurrentCData(2, parseInt(data[item].CIHRMS_CAL));
-        }, 500);
-        // this.setChartData(3, parseInt(data[item].NVRMS));
-          
-      }
-      // for (const item in data) {
-      //   if(item !== "id"){
-      //     this.setLineChartWattData(0, parseInt(data[item].AWATT));
-      //     this.setLineChartWattData(1, parseInt(data[item].BWATT));
-      //     this.setLineChartWattData(2, parseInt(data[item].CWATT));
-      //     this.setLineChartWattData(3, parseInt(data[item].NWATT));
-      //     this.setLineChartVarData(0, parseInt(data[item].AVAR));
-      //     this.setLineChartVarData(1, parseInt(data[item].BVAR));
-      //     this.setLineChartVarData(2, parseInt(data[item].CVAR));
-      //     this.setLineChartVarData(3, parseInt(data[item].NVAR));
-      //     this.setLineChartVaData(0, parseInt(data[item].AVA));
-      //     this.setLineChartVaData(1, parseInt(data[item].BVA));
-      //     this.setLineChartVaData(2, parseInt(data[item].CVA));
-      //     this.setLineChartVaData(3, parseInt(data[item].NVA));
-      //     this.setLineChartThdiData(0, parseInt(data[item].AVTHD));
-      //     this.setLineChartThdiData(1, parseInt(data[item].BVTHD));
-      //     this.setLineChartThdiData(2, parseInt(data[item].CVTHD));
-      //     this.setLineChartThdiData(3, parseInt(data[item].NVTHD));
-      //     this.setLineChartThdiData(0, parseInt(data[item].AITHD));
-      //     this.setLineChartThdiData(1, parseInt(data[item].BITHD));
-      //     this.setLineChartThdiData(2, parseInt(data[item].CITHD));
-      //     this.setLineChartThdiData(3, parseInt(data[item].NITHD));
-      //     this.setLineChartThdvData(0, parseInt(data[item].AITHD));
-      //     this.setLineChartThdvData(1, parseInt(data[item].BITHD));
-      //     this.setLineChartThdvData(2, parseInt(data[item].CITHD));
-      //     this.setLineChartThdvData(3, parseInt(data[item].NITHD));
-      //     this.setLineChartThdvData(0, parseInt(data[item].AVTHD));
-      //     this.setLineChartThdvData(1, parseInt(data[item].BVTHD));
-      //     this.setLineChartThdvData(2, parseInt(data[item].CVTHD));
-      //     this.setLineChartThdvData(3, parseInt(data[item].NVTHD));
-      //   }
-      // }
-    })
+        for (let item in data) {
+          setTimeout(() => {
+            // console.log(data[item])
+            this.setChartData(0, parseInt(data[item].AVRMS));
+            this.setChartData(1, parseInt(data[item].AFVRMS));
+            this.setChartData(2, parseInt(data[item].AVHRMS_CAL));
+            this.setChartBData(0, parseInt(data[item].BVRMS));
+            this.setChartBData(1, parseInt(data[item].BFVRMS));
+            this.setChartBData(2, parseInt(data[item].BVHRMS_CAL));
+            this.setChartCData(0, parseInt(data[item].CVRMS));
+            this.setChartCData(1, parseInt(data[item].CFVRMS));
+            this.setChartCData(2, parseInt(data[item].CVHRMS_CAL));
+            this.setAthdv(data[item].AVTHD * 100);
+            this.setBthdv(data[item].BVTHD * 100);
+            this.setCthdv(data[item].CVTHD * 100);
+            this.setAthdi(data[item].AITHD * 100);
+            this.setBthdi(data[item].BITHD * 100);
+            this.setCthdi(data[item].CITHD * 100);
+            this.setChartCurrentData(0, parseInt(data[item].AIRMS));
+            this.setChartCurrentData(1, parseInt(data[item].AFIRMS));
+            this.setChartCurrentData(2, parseInt(data[item].AIHRMS_CAL));
+            this.setChartCurrentBData(0, parseInt(data[item].BIRMS));
+            this.setChartCurrentBData(1, parseInt(data[item].BFIRMS));
+            this.setChartCurrentBData(2, parseInt(data[item].BIHRMS_CAL));
+            this.setChartCurrentCData(0, parseInt(data[item].CIRMS));
+            this.setChartCurrentCData(1, parseInt(data[item].CFIRMS));
+            this.setChartCurrentCData(2, parseInt(data[item].CIHRMS_CAL));
+          }, 500);
+          // this.setChartData(3, parseInt(data[item].NVRMS));
+
+        }
+        // for (const item in data) {
+        //   if(item !== "id"){
+        //     this.setLineChartWattData(0, parseInt(data[item].AWATT));
+        //     this.setLineChartWattData(1, parseInt(data[item].BWATT));
+        //     this.setLineChartWattData(2, parseInt(data[item].CWATT));
+        //     this.setLineChartWattData(3, parseInt(data[item].NWATT));
+        //     this.setLineChartVarData(0, parseInt(data[item].AVAR));
+        //     this.setLineChartVarData(1, parseInt(data[item].BVAR));
+        //     this.setLineChartVarData(2, parseInt(data[item].CVAR));
+        //     this.setLineChartVarData(3, parseInt(data[item].NVAR));
+        //     this.setLineChartVaData(0, parseInt(data[item].AVA));
+        //     this.setLineChartVaData(1, parseInt(data[item].BVA));
+        //     this.setLineChartVaData(2, parseInt(data[item].CVA));
+        //     this.setLineChartVaData(3, parseInt(data[item].NVA));
+        //     this.setLineChartThdiData(0, parseInt(data[item].AVTHD));
+        //     this.setLineChartThdiData(1, parseInt(data[item].BVTHD));
+        //     this.setLineChartThdiData(2, parseInt(data[item].CVTHD));
+        //     this.setLineChartThdiData(3, parseInt(data[item].NVTHD));
+        //     this.setLineChartThdiData(0, parseInt(data[item].AITHD));
+        //     this.setLineChartThdiData(1, parseInt(data[item].BITHD));
+        //     this.setLineChartThdiData(2, parseInt(data[item].CITHD));
+        //     this.setLineChartThdiData(3, parseInt(data[item].NITHD));
+        //     this.setLineChartThdvData(0, parseInt(data[item].AITHD));
+        //     this.setLineChartThdvData(1, parseInt(data[item].BITHD));
+        //     this.setLineChartThdvData(2, parseInt(data[item].CITHD));
+        //     this.setLineChartThdvData(3, parseInt(data[item].NITHD));
+        //     this.setLineChartThdvData(0, parseInt(data[item].AVTHD));
+        //     this.setLineChartThdvData(1, parseInt(data[item].BVTHD));
+        //     this.setLineChartThdvData(2, parseInt(data[item].CVTHD));
+        //     this.setLineChartThdvData(3, parseInt(data[item].NVTHD));
+        //   }
+        // }
+      })
   }
 
-  setChartData(position, value)
-  {
+  setChartData(position, value) {
     // console.log('data length ', this.lineChartData[position].data.length);
     // console.log('dataLabel length ', this.lineChartLabels.length);
     // console.log('data ', this.lineChartData[position].data);
@@ -268,7 +266,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.lineChartData[position].data[this.lineChartLabels.length] = value
       // console.log('new data NEW', this.lineChartData[position].data);
       let dataArray = [];
-      for(let i = 1; i <= this.lineChartLabels.length; i++) {
+      for (let i = 1; i <= this.lineChartLabels.length; i++) {
         dataArray.push(this.lineChartData[position].data[i]);
       }
       // console.log('temporal data ', dataArray);
@@ -281,8 +279,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.lineChartData[position].data.push(value)
     }
   }
-  setChartBData(position, value)
-  {
+  setChartBData(position, value) {
     // console.log('data length ', this.lineChartData[position].data.length);
     // console.log('dataLabel length ', this.lineChartLabels.length);
     // console.log('data ', this.lineChartData[position].data);
@@ -291,7 +288,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.lineChartBData[position].data[this.lineChartLabels.length] = value
       // console.log('new data NEW', this.lineChartBData[position].data);
       let dataArray = [];
-      for(let i = 1; i <= this.lineChartLabels.length; i++) {
+      for (let i = 1; i <= this.lineChartLabels.length; i++) {
         dataArray.push(this.lineChartBData[position].data[i]);
       }
       // console.log('temporal data ', dataArray);
@@ -304,8 +301,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.lineChartBData[position].data.push(value)
     }
   }
-  setChartCData(position, value)
-  {
+  setChartCData(position, value) {
     // console.log('data length ', this.lineChartData[position].data.length);
     // console.log('dataLabel length ', this.lineChartLabels.length);
     // console.log('data ', this.lineChartData[position].data);
@@ -314,7 +310,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.lineChartCData[position].data[this.lineChartLabels.length] = value;
       // console.log('new data NEW', this.lineChartCData[position].data);
       let dataArray = [];
-      for(let i = 1; i <= this.lineChartLabels.length; i++) {
+      for (let i = 1; i <= this.lineChartLabels.length; i++) {
         dataArray.push(this.lineChartCData[position].data[i]);
       }
       // console.log('temporal data ', dataArray);
@@ -327,14 +323,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.lineChartCData[position].data.push(value)
     }
   }
-  setChartCurrentData(position, value)
-  {
-    console.log(value)
+  setChartCurrentData(position, value) {
+    // console.log(value)
     if (this.lineChartCurrentData[position].data.length == this.lineChartLabels.length) {
       // this.lineChartCData[position].data[this.lineChartLabels.length] = value
       this.lineChartCurrentData[position].data[this.lineChartLabels.length] = value;
       let dataArray = [];
-      for(let i = 1; i <= this.lineChartLabels.length; i++) {
+      for (let i = 1; i <= this.lineChartLabels.length; i++) {
         dataArray.push(this.lineChartCurrentData[position].data[i]);
       }
       // @ts-ignore
@@ -344,12 +339,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.lineChartCurrentData[position].data.push(value)
     }
   }
-  setChartCurrentBData(position, value)
-  {
+  setChartCurrentBData(position, value) {
     if (this.lineChartCurrentBData[position].data.length == this.lineChartLabels.length) {
       this.lineChartCurrentBData[position].data[this.lineChartLabels.length] = value
       let dataArray = [];
-      for(let i = 1; i <= this.lineChartLabels.length; i++) {
+      for (let i = 1; i <= this.lineChartLabels.length; i++) {
         dataArray.push(this.lineChartCurrentBData[position].data[i]);
       }
       // @ts-ignore
@@ -359,12 +353,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.lineChartCurrentBData[position].data.push(value)
     }
   }
-  setChartCurrentCData(position, value)
-  {
+  setChartCurrentCData(position, value) {
     if (this.lineChartCurrentCData[position].data.length == this.lineChartLabels.length) {
       this.lineChartCurrentCData[position].data[this.lineChartLabels.length] = value
       let dataArray = [];
-      for(let i = 1; i <= this.lineChartLabels.length; i++) {
+      for (let i = 1; i <= this.lineChartLabels.length; i++) {
         dataArray.push(this.lineChartCurrentCData[position].data[i]);
       }
       // @ts-ignore
@@ -410,11 +403,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     ];
     this.cthdi = value.toFixed(2);
   }
-  setLineChartWattData(position, value)
-  {
+  setLineChartWattData(position, value) {
     if (this.lineChartWattData[position].data.length == this.lineChartLabels.length - 1) {
       let dataArray = [];
-      for(let i = 1; i < this.lineChartLabels.length; i++) {
+      for (let i = 1; i < this.lineChartLabels.length; i++) {
         dataArray.push(this.lineChartWattData[position].data[i]);
       }
       // @ts-ignore
@@ -425,11 +417,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.lineChartWattData[position].data.push(value)
     }
   }
-  setLineChartVarData(position, value)
-  {
+  setLineChartVarData(position, value) {
     if (this.lineChartVarData[position].data.length == this.lineChartLabels.length - 1) {
       let dataArray = [];
-      for(let i = 1; i < this.lineChartLabels.length; i++) {
+      for (let i = 1; i < this.lineChartLabels.length; i++) {
         dataArray.push(this.lineChartVarData[position].data[i]);
       }
       // @ts-ignore
@@ -440,11 +431,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.lineChartVarData[position].data.push(value)
     }
   }
-  setLineChartVaData(position, value)
-  {
+  setLineChartVaData(position, value) {
     if (this.lineChartVaData[position].data.length == this.lineChartLabels.length - 1) {
       let dataArray = [];
-      for(let i = 1; i < this.lineChartLabels.length; i++) {
+      for (let i = 1; i < this.lineChartLabels.length; i++) {
         dataArray.push(this.lineChartVaData[position].data[i]);
       }
       // @ts-ignore
@@ -455,11 +445,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.lineChartVaData[position].data.push(value)
     }
   }
-  setLineChartThdiData(position, value)
-  {
+  setLineChartThdiData(position, value) {
     if (this.lineChartThdiData[position].data.length == this.lineChartLabels.length - 1) {
       let dataArray = [];
-      for(let i = 1; i < this.lineChartLabels.length; i++) {
+      for (let i = 1; i < this.lineChartLabels.length; i++) {
         dataArray.push(this.lineChartThdiData[position].data[i]);
       }
       // @ts-ignore
@@ -470,11 +459,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.lineChartThdiData[position].data.push(value)
     }
   }
-  setLineChartThdvData(position, value)
-  {
+  setLineChartThdvData(position, value) {
     if (this.lineChartThdvData[position].data.length == this.lineChartLabels.length - 1) {
       let dataArray = [];
-      for(let i = 1; i < this.lineChartLabels.length; i++) {
+      for (let i = 1; i < this.lineChartLabels.length; i++) {
         dataArray.push(this.lineChartThdvData[position].data[i]);
       }
       // @ts-ignore
